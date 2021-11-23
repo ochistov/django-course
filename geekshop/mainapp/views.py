@@ -32,7 +32,7 @@ def products(request):
     #     ],
     #     'title' : 'GeekShop - Каталог',
     # }
-    context = { 'title' : 'Geekshop - каталог'}
+    context = { 'title' : 'Geekshop | Каталог'}
 
     context['products'] = Products.objects.all()
     return render(request, 'mainapp\products.html', context)
