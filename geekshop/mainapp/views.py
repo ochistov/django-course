@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from mainapp.models import Products
+from django.views.generic import DetailView
+
+from mainapp.models import Products, ProductCategory
+
 
 # Create your views here.
 def index(request):
@@ -35,4 +38,18 @@ def products(request):
     context = { 'title' : 'Geekshop | Каталог'}
 
     context['products'] = Products.objects.all()
+    context['categories'] = ProductCategory.objects.all()
     return render(request, 'mainapp\products.html', context)
+
+
+
+class ProductDetail(DetailView):
+    model = Products
+    template_name = 'mainapp\detail.html'
+    context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetail, self).get_context_data(**kwargs)
+        product = self.get_object()
+        context['product'] = product
+        return  context
