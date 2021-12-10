@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 from django.views.generic import DetailView
 
@@ -7,11 +8,12 @@ from mainapp.models import Products, ProductCategory
 # Create your views here.
 def index(request):
     context = {
-        'title':'geekshop',
+        'title': 'geekshop',
     }
     return render(request, 'mainapp\index.html', context)
 
-def products(request):
+
+def products(request, id_category=None, page=1):
     # context = {
     #     'products' : [
     #         {
@@ -35,12 +37,25 @@ def products(request):
     #     ],
     #     'title' : 'GeekShop - Каталог',
     # }
-    context = { 'title' : 'Geekshop | Каталог'}
+    context = {'title': 'Geekshop | Каталог'}
+    if id_category and id_category != 9:
+        products = Products.objects.filter(category_id=id_category)
+    elif id_category == 9:
+        products = Products.objects.all()
+    else:
+        products = Products.objects.all()
+    paginator = Paginator(products, per_page=3)
 
-    context['products'] = Products.objects.all()
+    try:
+        products_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
+
+    context['products'] = products_paginator
     context['categories'] = ProductCategory.objects.all()
     return render(request, 'mainapp\products.html', context)
-
 
 
 class ProductDetail(DetailView):
@@ -52,4 +67,4 @@ class ProductDetail(DetailView):
         context = super(ProductDetail, self).get_context_data(**kwargs)
         product = self.get_object()
         context['product'] = product
-        return  context
+        return context

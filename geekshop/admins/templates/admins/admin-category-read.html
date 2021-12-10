@@ -47,16 +47,13 @@
                                             {% endif %}
                                         </td>
                                         <td>
-{#                                            <form action="{% url 'admins:admin_category_delete' category.id %}" method="post">#}
-                                            <form action="#">
+                                            <form action="{% url 'admins:admin_category_delete' category.id %}" method="post">
                                                 {% csrf_token %}
                                                 <input class="btn btn-danger btn-block" type="submit" value="Удалить">
                                             </form>
                                         </td>
                                         <td>
                                             <a href="{% url 'admins:admin_category_update' pk=category.id %}">
-
-
                                                 <input class="btn btn-success btn-block" type="submit" value="Изменить">
                                             </a>
                                         </td>
@@ -68,7 +65,6 @@
                     </div>
                     <div class="card-footer">
                         <a href="{% url 'admins:admin_category_create' %}">
-
                             <button class="btn btn-success">Создать категорию</button>
                         </a>
                     </div>
