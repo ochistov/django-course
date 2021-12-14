@@ -35,7 +35,8 @@ class RegisterListView(FormView, BaseClassContextMixin):
             user = form.save()
             if self.send_verify_link(user):
                 messages.set_level(request, messages.SUCCESS)
-                messages.success(request, 'Вы успешно зарегистрировались!')
+                messages.success(request,
+                                 'Вы успешно зарегистрировались!\nДля входа Вам необходимо активировать учетную запись,\nперейдя по ссылке, отправленной Вам на электронную почту')
                 return HttpResponseRedirect(reverse('authapp:login'))
             else:
                 messages.set_level(request, messages.ERROR)
@@ -48,13 +49,13 @@ class RegisterListView(FormView, BaseClassContextMixin):
             messages.error(request, form.errors)
         return render(request, self.template_name, {'form': form})
 
-    def send_verify_link(self,user):
+    def send_verify_link(self, user):
         verify_link = reverse('authapp:verify', args=[user.email, user.activation_key])
         subject = f'Для активации учетной записи {user.username} перейдите по ссылке'
         message = f'Для активации учетной записи {user.username} перейдите по ссылке: \n {settings.DOMAIN_NAME}{verify_link}'
         return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
-    def verify(self,email,activate_key):
+    def verify(self, email, activate_key):
         try:
             user = User.objects.get(email=email)
             if user and user.activation_key == activate_key and not user.is_activation_key_expires():
@@ -66,6 +67,7 @@ class RegisterListView(FormView, BaseClassContextMixin):
             return render(self, 'authapp/verification.html')
         except Exception as e:
             return HttpResponseRedirect(reverse('index'))
+
 
 class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
     template_name = 'authapp/profile.html'
