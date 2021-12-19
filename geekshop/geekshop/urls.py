@@ -22,12 +22,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('products/', include('mainapp.urls',namespace='mainapp')),
-    path('users/', include('authapp.urls',namespace='authapp')),
-    path('baskets/', include('baskets.urls',namespace='baskets')),
-    path('admins/', include('admins.urls',namespace='admins')),
-
-   # path('products/', products, name='products'),
+    path('products/', include('mainapp.urls', namespace='mainapp')),
+    path('users/', include('authapp.urls', namespace='authapp')),
+    path('baskets/', include('baskets.urls', namespace='baskets')),
+    path('admins/', include('admins.urls', namespace='admins')),
+    path('', include('social_django.urls', namespace='social')),
+    # path('products/', products, name='products'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
