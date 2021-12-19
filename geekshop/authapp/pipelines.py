@@ -45,7 +45,7 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         user.image = path_photo
 
     user.age = age
-    if age < 18:
+    if age < 1000:
         user.delete()
         raise AuthForbidden('social_core.backends.vk.VKOAuth2')
 
