@@ -11,7 +11,7 @@ def load_from_json(file_name):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        categories = load_from_json('mainapp/fixtures/category.json')
+        categories = load_from_json('mainapp/fixtures/categories.json')
 
         ProductCategory.objects.all().delete()
         for category in categories:
