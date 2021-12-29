@@ -1,0 +1,15 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JTQu9GPINCw0LrRgtC40LLQsNGG0LjQuCDRg9GH0LXRgtC90L7QuSDQt9Cw0L8=?=
+ =?utf-8?b?0LjRgdC4IHRlc3QxMjMg0L/QtdGA0LXQudC00LjRgtC1INC/0L4g0YHRgdGL0Ls=?=
+ =?utf-8?b?0LrQtQ==?=
+From: webmaster@localhost
+To: test123@example.com
+Date: Tue, 14 Dec 2021 18:28:57 -0000
+Message-ID: <163950653711.7440.6162866234689215915@shaitan-pc>
+
+Для активации учетной записи test123 перейдите по ссылке: 
+ http://localhost:8000/users/verify/test123@example.com/10ae49b5764b0894111e028c27e62f09a3889e52/
+-------------------------------------------------------------------------------

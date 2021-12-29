@@ -1,0 +1,15 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JTQu9GPINCw0LrRgtC40LLQsNGG0LjQuCDRg9GH0LXRgtC90L7QuSDQt9Cw0L8=?=
+ =?utf-8?b?0LjRgdC4IHRlc3QxMTExMTEg0L/QtdGA0LXQudC00LjRgtC1INC/0L4g0YHRgdGL?=
+ =?utf-8?b?0LvQutC1?=
+From: test_user@example.com
+To: test111111@example.com
+Date: Tue, 14 Dec 2021 18:31:45 -0000
+Message-ID: <163950670594.16444.15638545091998502800@shaitan-pc>
+
+Для активации учетной записи test111111 перейдите по ссылке: 
+ http://localhost:8000/users/verify/test111111@example.com/b892b100baf2f7988a309e44ef4f8eb01531f9a9/
+-------------------------------------------------------------------------------
