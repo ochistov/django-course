@@ -39,11 +39,11 @@ def products(request, id_category=None, page=1):
     # }
     context = {'title': 'Geekshop | Каталог'}
     if id_category and id_category != 9:
-        products = Products.objects.filter(category_id=id_category)
+        products = Products.objects.filter(category_id=id_category).select_related('category')
     elif id_category == 9:
-        products = Products.objects.all()
+        products = Products.objects.all().select_related('category')
     else:
-        products = Products.objects.all()
+        products = Products.objects.all().select_related('category')
     paginator = Paginator(products, per_page=3)
 
     try:
