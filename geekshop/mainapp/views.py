@@ -1,18 +1,59 @@
+import os
+
+from django.conf import settings
+from django.core.cache import cache
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
+from django.views.decorators.cache import never_cache
 from django.views.generic import DetailView
 
 from mainapp.models import Products, ProductCategory
 
-
 # Create your views here.
+
+MODULE_DIR = os.path.dirname(__file__)
+def get_link_category():
+    if settings.LOW_CACHE:
+        key = 'link_category'
+        link_category = cache.get(key)
+        if link_category is None:
+            link_category = ProductCategory.objects.all()
+            cache.set(key,link_category)
+        return link_category
+    else:
+        return ProductCategory.objects.all()
+
+def get_link_product():
+    if settings.LOW_CACHE:
+        key = 'link_product'
+        link_product = cache.get(key)
+        if link_product is None:
+            link_product = Products.objects.all().select_related('category')
+            cache.set(key,link_product)
+        return link_product
+    else:
+        return Products.objects.all().select_related('category')
+
+
+def get_product(pk):
+    if settings.LOW_CACHE:
+        key = f'product{pk}'
+        product = cache.get(key)
+        if product is None:
+            product = Products.objects.get(id=pk)
+            cache.set(key,product)
+        return product
+    else:
+        return Products.objects.get(id=pk)
+
+
 def index(request):
     context = {
         'title': 'geekshop',
     }
     return render(request, 'mainapp/index.html', context)
 
-
+@never_cache
 def products(request, id_category=None, page=1):
     # context = {
     #     'products' : [
